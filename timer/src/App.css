@@ -1,0 +1,47 @@
+.title {
+  position: absolute;
+  z-index:1;
+  width: 100vw;
+  height:100vh;
+  display: block;
+  text-align: center;
+  background-color: black;
+}
+
+.timer {
+  position: absolute;
+  margin-top: 30vh;
+}
+
+input {
+  margin-left: 10vh;  
+  /* margin-top: 30vh; */
+  border: none;
+  background-color: transparent;
+  width : 30vh;
+  height: 30vh;
+  font-size: 28vh;
+  color: white;
+}
+
+input:focus {
+  outline: none;
+}
+
+.line {
+  position: absolute;
+  z-index:3;  
+  margin-top: 80vh;
+  height: 5vh;
+  width: 100%;
+  background-color:red;
+}
+
+#green {
+  position: absolute;
+  z-index:3;  
+  margin-top: 80vh;
+  height: 5vh;
+  width: 0%;
+  background-color:greenyellow;
+}

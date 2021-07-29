@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  color: #1b3039;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #455a64;
+}
+
+.question {
+  padding-top: 30vh;
+  height: 30vh;
+  font-size : 20vh;
+  text-align: center;
+}
+
+input {
+  width: 30vh;
+  height: 33vh;
+  background: transparent;
+  border: none;
+  font-size: 20vh;
+}
+
+input::placeholder {
+  color:  #1b3039;
+}
+
+.result {
+  height: 10vh;
+  font-size: 10vh;
+  text-align: center;
+}
+
+input:focus {outline:none;}

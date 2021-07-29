@@ -1,0 +1,33 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  position : relative;
+  text-align: center;
+  background-color: black;
+  padding-top: 10vh;
+}
+
+button {
+  margin-top: 5vh;
+  width: 10vh;
+  height: 5vh;
+  margin-left: 3vh;
+  font-size: 2.5vh;
+  font-style:unset;
+  font-weight: 650;
+  border-radius: 50%;
+}
+
+.result {
+  color: whitesmoke;
+  margin-top: 3vh;
+  font-size: 12vh;
+  font-style: italic;
+}
+
+.score {
+  margin-top: 3vh;
+  font-size: 12vh;
+  color: whitesmoke;
+}
