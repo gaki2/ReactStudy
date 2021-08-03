@@ -1,0 +1,122 @@
+
+.container {
+  margin: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+}
+
+.modalStyle {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 20%;
+  height: 20%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background-color: rgb(234,234,234);
+  padding: 50px;
+  border-radius: 5%;
+  text-align: center;
+}
+
+.closeBtnBox {
+  position: fixed;
+  top: 0%;
+  left: 100%;
+  transform: translate(-50%, -50%);
+  z-index: 1000, 
+}
+
+.closeBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+ 
+.todo {
+  width: 100%;
+  height: 30%;
+  position: relative;
+  margin-top: 10px;
+}
+
+.todoInput {
+  width: 100%;
+  height: 30px;
+}
+
+.deadline {
+  width:100%;
+  height: 30%;
+  position: relative;
+  margin-top: 10px;
+}
+
+.dateBox {
+  width: 53%;
+  height: 31px;
+}
+
+.timeBox {
+  margin-left: 5px;
+  width: 40%;
+  height: 32px;
+}
+
+.okBtnBox {
+  width: 100%;
+  height: 100%;
+}
+
+.okBtn {
+  background-color: rgb(71,139,214);
+  border: none;
+  color: white;
+  width: 100%;
+  height: 20%;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.checkbox {
+  display: inline-block;
+  color: red;
+  border: none;
+  background-color: red;
+}
+
+li {
+  list-style: none;
+  display: inline-block;
+}
+
+.infoBtn {
+  margin-left: 10px;
+  background-color: transparent;
+  border-radius: 5px;
+  width: 50px;
+  height: 30px;  
+}
+
+.addTodo {
+  position: fixed;
+  top: 70vh;
+  left: 40vw;
+  width: 20vw;
+  height: 20vw;
+  border-radius: 10vw;
+  font-size: 3vw;
+  background-color:rgb(234,234,234);
+  border-color: transparent;
+}
+
+.todobox {
+  position:relative;
+  padding-top: 5vh;
+  font-size: 3vh;
+  font-style:oblique;
+  font-weight: 600;
+}
