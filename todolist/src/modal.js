@@ -50,7 +50,7 @@ export default function Modal({open , closeModal, addInfo}) {
     if (!open)
         return (null);
 
-    
+
 
     const taskChange = (e) => {
         setInfo({
