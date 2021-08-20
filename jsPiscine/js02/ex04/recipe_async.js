@@ -1,35 +1,72 @@
-const axios = require('axios');
-const cookingStep = {
-    '반죽 만들기' : 3,
-    '1차 발효' : 5,
-    '성형 하기' : 4.2,
-    '2차 발효' : 2,
-    '튀기기' : 5,
-}
-const cookingStepArray = Object.keys(cookingStep);
-
 function randomFail() {
-    if (Math.random() < 0.2) throw "제작 실패..!(월급이 삭감되었다 ㅜㅜ)";
-}
-
-async function cookIngredient(step) {
-    setTimeout(() => {
-        console.log(`${step} 시작`)
-        randomFail();
-    }, cookingStep[step] * 1000)
-}
-
-async function cook () {
-    try {
-        await cookIngredient('반죽 만들기');
-        await cookIngredient('1차 발효');
-        await cookIngredient('성형 하기');
-        await cookIngredient('2차 발효');
-        await cookIngredient('튀기기');
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-cook();
-
+    if (Math.random() < 0.2) return true;
+    return false;
+  }
+  
+  const phase = (interval) => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (randomFail()) reject();
+        resolve();
+      }, interval);
+    });
+  };
+  
+  const main = async () => {
+    var loop = true;
+    do {
+      console.log("1. 반죽 만들기");
+      try {
+        await phase(3000);
+        loop = false;
+      } catch {
+        console.log("제작 실패..!(월급이 삭감되었다 ㅜㅜ)");
+      }
+    } while (loop);
+  
+    loop = true;
+    do {
+      console.log("2. 1차 발효");
+      try {
+        await phase(5000);
+        loop = false;
+      } catch {
+        console.log("제작 실패..!(월급이 삭감되었다 ㅜㅜ)");
+      }
+    } while (loop);
+  
+    loop = true;
+    do {
+      console.log("3. 성형 하기");
+      try {
+        await phase(4200);
+        loop = false;
+      } catch {
+        console.log("제작 실패..!(월급이 삭감되었다 ㅜㅜ)");
+      }
+    } while (loop);
+  
+    loop = true;
+    do {
+      console.log("4. 2차 발효");
+      try {
+        await phase(2000);
+        loop = false;
+      } catch {
+        console.log("제작 실패..!(월급이 삭감되었다 ㅜㅜ)");
+      }
+    } while (loop);
+  
+    loop = true;
+    do {
+      console.log("5. 튀기기");
+      try {
+        await phase(5000);
+        loop = false;
+      } catch {
+        console.log("제작 실패..!(월급이 삭감되었다 ㅜㅜ)");
+      }
+    } while (loop);
+  };
+  
+  main();

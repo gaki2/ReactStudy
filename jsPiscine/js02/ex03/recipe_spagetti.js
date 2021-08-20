@@ -20,87 +20,136 @@ function randomFail() {
     if (Math.random() < 0.4) throw "Failed...!!!!ㅠㅠㅠ";
 }
 
-const retryBCourse = (step) => {
-        return new Promise((resolve) => {
-            console.log(`${step}`)
-            setTimeout(() => {
-                try {
-                    randomFail();
-                    resolve(`${step} 성공`);
-                } catch (error) {
-                    console.log(`${step} ${error}`);
-                    retryBCourse(step);
-                }
-            }, cookingBStep[step] * 100)
-        })
-}
+let AISFINISHED = false;
+let BISFINISHED = false;
 
-const retryACourse = (step) => {
-        return new Promise((resolve) => {
-            console.log(`${step}`)
-            setTimeout(() => {
-                try {
-                    randomFail();
-                    console.log(`${step} 성공`);
-                    console.log('A ALL FINISHED')
-                    resolve(true);
-                } catch (error) {
-                    console.log(`${step} ${error}`);
-                    retryACourse(step);
-                }
-            }, cookingAStep[step] * 100)
-        })
-}
-
-const retryCCourse = (step) => {
-        return new Promise((resolve) => {
-            console.log(`${step}`)
-            setTimeout(() => {
-                try {
-                    randomFail();
-                    console.log(`${step} 성공`);
-                    resolve('Bon Appetit ~');
-                } catch (error) {
-                    console.log(`${step} ${error}`);
-                    retryCCourse(step);
-                }
-            }, cookingCStep[step] * 100)
-        })
-    }
-
-const cookIngredients = () => {
-    return new Promise((resolve) => {
-        let i = -1;
-
-        retryBCourse(cookingBStepArray[++i])
-        .then((result) => {
-            console.log(result);
-            return retryBCourse(cookingBStepArray[++i])
-        })
-        .then((result) => {
-            console.log(result);
-            return retryBCourse(cookingBStepArray[++i])
-        })
-        .then((result) => {
-            console.log(result);
-            return retryBCourse(cookingBStepArray[++i])
-        })
-        .then((result) => {
-            console.log(result);
-            console.log('B ALL FINISHED');
-            resolve(true);
-        })
+const A = () => {
+    console.log('면 볶기');
+    new Promise((resolve, reject) => {
+        setTimeout(() => {
+            try {
+                randomFail();
+                resolve('success');
+            } catch (error) {
+                console.log(error);
+                reject('fail');
+            }
+        }, (10000));
     })
-}
-
-const cook = () => {
-    Promise.all([cookIngredients(), retryACourse(cookingAStepArray[0])])
     .then((result) => {
-        retryCCourse(cookingCStepArray[0])
-        .then((result) => {
-            console.log(result);
-        })
+        AISFINISHED = true;
+        C();
     })
-};
+    .catch((error) => {
+        A();
+    })
+}
 
-cook();
+const B1 = () => {
+    console.log('브로콜리 삶기')
+    new Promise((resolve, reject) => {
+        setTimeout(() => {
+            try {
+                randomFail();
+                resolve('success');
+            } catch (error) {
+                console.log(error);
+                reject('fail');
+            }
+        }, (1000));
+    })
+    .then((result) => {
+        B2();
+    })
+    .catch((error) => {
+        B1();
+    })
+}
+
+const B2 = () => {
+    console.log('마늘양파 볶기');
+    new Promise((resolve, reject) => {
+        setTimeout(() => {
+            try {
+                randomFail();
+                resolve('success');
+            } catch (error) {
+                console.log(error);
+                reject('fail');
+            }
+        }, (2000));
+    })
+    .then((result) => {
+        B3();
+    })
+    .catch((error) => {
+        B2();
+    })
+}
+
+const B3 = () => {
+    console.log('햄베이컨 굽기');
+    new Promise((resolve, reject) => {
+        setTimeout(() => {
+            try {
+                randomFail();
+                resolve('success');
+            } catch (error) {
+                console.log(error);
+                reject('fail');
+            }
+        }, (2000));
+    })
+    .then((result) => {
+        B4();
+    })
+    .catch((error) => {
+        B3();
+    })
+}
+
+const B4 = () => {
+    console.log('소스랑 야채 볶기');
+    new Promise((resolve, reject) => {
+        setTimeout(() => {
+            try {
+                randomFail();
+                resolve('success');
+            } catch (error) {
+                console.log(error);
+                reject('fail');
+            }
+        }, (3000));
+    })
+    .then((result) => {
+        BISFINISHED = true;
+        C();
+    })
+    .catch((error) => {
+        B4();
+    })
+}
+
+const C = () => {
+    if (AISFINISHED && BISFINISHED) {
+        console.log('전부 다 볶기');
+        new Promise((resolve, reject) => {
+            setTimeout(() => {
+                try {
+                    randomFail();
+                    resolve('success');
+                } catch (error) {
+                    console.log(error);
+                    reject('fail');
+                }
+            }, (3000));
+        })
+        .catch((error) => {
+            C();
+        })
+    } else return ;
+}
+
+A();
+B1();
+
