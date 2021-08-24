@@ -53,13 +53,12 @@ function Input() {
   }
 
   const Click = function(item) {
+    console.log(item.apikey);
     setSeletedkey(item.apikey);
   }
 
   const Remove = function(item) {
     if (item.apikey !== initial_api_key) {
-      console.log(item.name);
-      console.log(namelist);
       setNamelist(namelist.filter((value) => value.apikey !== item.apikey));
       setKeys(keys.filter((value) => value !== item.apikey));
     } else {
@@ -85,13 +84,13 @@ function Input() {
     </div>
   )
 }
+///////////////////////////////////////////////////////////////////////
 
-function DividePage() {
-  
-}
 
 function PrintPage({ apikey }) {
   const [pages, setPages] = useState();
+  const [pagenums, setPagenums] = useState();
+  const [pageindex, setPageindex] = useState(0);
 
   useEffect(() => {
     axios({
@@ -106,30 +105,42 @@ function PrintPage({ apikey }) {
         created_time: 'last_edited_time',
       }
     })
-      .then((response) => setPages(response.data.results))
+      .then((response) => {
+        let pagenumbers = (response.data.results.length % 5) === 0 ? parseInt(response.data.results.length / 5) : parseInt(response.data.results.length / 5) + 1;
+        setPagenums(pagenumbers);
+        setPages(response.data.results)})
       .catch((error) => console.error(error));
   }, [])
+
+  function nextPage(index) {
+    setPageindex(index);
+  }
 
   //키의 intergration 이름       //글제목 글주소 생성날짜 최근수정날짜
 
   if (pages) {
-    console.log(pages);
+    console.log(pagenums);
+    const lis = [];
+    for(let i = 0; i < pagenums; i++) {
+      lis.push(<button onClick={() => nextPage(i)}>{i+1}</button>)
+    }
     let title;
     return (
       <div>
         {
-          pages.map((item) => {
+          pages.slice(pageindex * 5, pageindex * 5 + 5).map((item) => {
             title = (typeof item.properties.title === 'undefined') ? '제목없음' : item.properties.title.title[0].plain_text;
             return(
               <ul>
                 <li>글제목 : {title}</li>
-                <li><a herf={item.url}>{item.url}</a></li>
+                <li><a href={item.url}>{item.url}</a></li>
                 <li>생성시간 : {item.created_time}</li>
                 <li>최근 수정 날짜 : {item.last_edited_time}</li>
               </ul>
             )
           })
         }
+        {lis}
       </div>
     )
   } else {
